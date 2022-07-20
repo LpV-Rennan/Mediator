@@ -9,9 +9,11 @@ class CartaoTest {
     Cartao bradesco, bb;
     ContaBancaria contaBradesco, contaBB;
     ArrayList<ContaBancaria> contasBradesco, contasBB;
-
+    Pessoa pessoa;
     @BeforeEach
     void setUp() {
+        pessoa = new Pessoa();
+
         bb = new Cartao(BB.getInstance(), 1);
         contaBB = new ContaBancaria(100f, 1);
         contasBB = new ArrayList<ContaBancaria>();
@@ -29,14 +31,14 @@ class CartaoTest {
     @Test
     void deveRetornarSaldoBB() {
         try {
-            assertEquals(100f , BancoVinteQuatroHoras.getInstancia().obterSaldo(bb));
+            assertEquals(100f , pessoa.obterSaldo(bb));
         } catch (Exception e) {
         }
     }
     @Test
     void deveRetornarSaldoBradesco() {
         try {
-            assertEquals(500f , BancoVinteQuatroHoras.getInstancia().obterSaldo(bradesco));
+            assertEquals(500f , pessoa.obterSaldo(bradesco));
         } catch (Exception e) {
         }
     }
@@ -44,16 +46,16 @@ class CartaoTest {
     @Test
     void deveSacarBB() {
         try {
-            BancoVinteQuatroHoras.getInstancia().sacar(2, bb);
-            assertEquals(98f , BancoVinteQuatroHoras.getInstancia().obterSaldo(bb));
+            pessoa.sacar(bb,2f);
+            assertEquals(98f , pessoa.obterSaldo(bb));
         } catch (Exception e) {
         }
     }
     @Test
     void deveSacarBradesco() {
         try {
-            BancoVinteQuatroHoras.getInstancia().sacar(340f, bradesco);
-            assertEquals(157.5f , BancoVinteQuatroHoras.getInstancia().obterSaldo(bradesco));
+            pessoa.sacar(bradesco,340f);
+            assertEquals(157.5f , pessoa.obterSaldo(bradesco));
         } catch (Exception e) {
         }
     }
